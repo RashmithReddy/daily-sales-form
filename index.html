@@ -1,95 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Sales Record</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-        }
-        label, input {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        input[type="number"] {
-            padding: 8px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Sales Record</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+    }
+    label, input {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    input[type="number"] {
+      padding: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h2>Daily Sales Record</h2>
-    <form>
-        <label for="date">Date:</label>
-        <input type="date" id="date" required>
+  <h2>Daily Sales Record</h2>
+  <form onsubmit="event.preventDefault(); submitData();">
+    <label for="date">Date:</label>
+    <input type="date" id="date" required>
 
-        <label for="square">Square Sales:</label>
-        <input type="number" id="square" oninput="calculateTotal()" step="0.01">
+    <label for="square">Square Sales:</label>
+    <input type="number" id="square" oninput="calculateTotal()" step="0.01">
 
-        <label for="dojo">Dojo Sales:</label>
-        <input type="number" id="dojo" oninput="calculateTotal()" step="0.01">
+    <label for="dojo">Dojo Sales:</label>
+    <input type="number" id="dojo" oninput="calculateTotal()" step="0.01">
 
-        <label for="sumup">SumUp Sales:</label>
-        <input type="number" id="sumup" oninput="calculateTotal()" step="0.01">
+    <label for="sumup">SumUp Sales:</label>
+    <input type="number" id="sumup" oninput="calculateTotal()" step="0.01">
 
-        <label for="cash">Cash:</label>
-        <input type="number" id="cash" oninput="calculateTotal()" step="0.01">
+    <label for="cash">Cash:</label>
+    <input type="number" id="cash" oninput="calculateTotal()" step="0.01">
 
-        <label for="catering">Catering Sales:</label>
-        <input type="number" id="catering" oninput="calculateTotal()" step="0.01">
+    <label for="catering">Catering Sales:</label>
+    <input type="number" id="catering" oninput="calculateTotal()" step="0.01">
 
-        <label for="total">Total:</label>
-        <input type="text" id="total" readonly>
+    <label for="total">Total:</label>
+    <input type="text" id="total" readonly>
 
-        <button type="submit">Submit</button>
-    </form>
-      <script>
-        function calculateTotal() {
-          let square = parseFloat(document.getElementById('square').value) || 0;
-          let dojo = parseFloat(document.getElementById('dojo').value) || 0;
-          let sumup = parseFloat(document.getElementById('sumup').value) || 0;
-          let cash = parseFloat(document.getElementById('cash').value) || 0;
-          let catering = parseFloat(document.getElementById('catering').value) || 0;
-          
-          let total = square + dojo + sumup + cash + catering;
-          document.getElementById('total').value = total.toFixed(2);
-        }
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    function calculateTotal() {
+      let square = parseFloat(document.getElementById('square').value) || 0;
+      let dojo = parseFloat(document.getElementById('dojo').value) || 0;
+      let sumup = parseFloat(document.getElementById('sumup').value) || 0;
+      let cash = parseFloat(document.getElementById('cash').value) || 0;
+      let catering = parseFloat(document.getElementById('catering').value) || 0;
+      
+      let total = square + dojo + sumup + cash + catering;
+      document.getElementById('total').value = total.toFixed(2);
+    }
 
-        function submitData() {
-          let data = {
-              date: document.getElementById('date').value,
-              square: document.getElementById('square').value,
-              dojo: document.getElementById('dojo').value,
-              sumup: document.getElementById('sumup').value,
-              cash: document.getElementById('cash').value,
-              catering: document.getElementById('catering').value,
-              total: document.getElementById('total').value
-          };
+    function submitData() {
+      let data = {
+        date: document.getElementById('date').value,
+        square: document.getElementById('square').value,
+        dojo: document.getElementById('dojo').value,
+        sumup: document.getElementById('sumup').value,
+        cash: document.getElementById('cash').value,
+        catering: document.getElementById('catering').value,
+        total: document.getElementById('total').value
+      };
 
-          fetch("https://script.google.com/macros/s/AKfycbzx9oao3C0L2JXvVCGd5bRoDQT9B_5njwHxuVNqiydF2Ew2bqPEK9e0NGHIKwBDh2Lj/exec", {  // Replace with your Web App URL
-              method: "POST",
-              mode: "no-cors",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data)
-          })
-          .then(() => {
-              alert("Sales recorded successfully!");
-              document.querySelector("form").reset();
-          })
-          .catch(error => console.error("Error:", error));
-        }
-      </script>
+      fetch("https://script.google.com/macros/s/AKfycbzx9oao3C0L2JXvVCGd5bRoDQT9B_5njwHxuVNqiydF2Ew2bqPEK9e0NGHIKwBDh2Lj/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        alert("Sales recorded successfully!");
+        document.querySelector("form").reset();
+      })
+      .catch(error => console.error("Error:", error));
+    }
+  </script>
 </body>
 </html>
