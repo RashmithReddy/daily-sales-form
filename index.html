@@ -58,6 +58,9 @@
     <label for="total">Total:</label>
     <input type="text" id="total" readonly>
 
+    <label for="actual_total">Actual Total:</label>
+    <input type="number" id="actual_total" step="0.01">
+
     <label for="cash_expenses">Cash Expenses:</label>
     <input type="number" id="cash_expenses" step="0.01">
 
@@ -84,33 +87,34 @@
       document.getElementById('total').value = total.toFixed(2);
     }
 
-    function submitData() {
-      let data = {
-        date: document.getElementById('date').value,
-        square: document.getElementById('square').value,
-        dojo: document.getElementById('dojo').value,
-        sumup: document.getElementById('sumup').value,
-        cash: document.getElementById('cash').value,
-        catering: document.getElementById('catering').value,
-        cash_expenses: document.getElementById('cash_expenses').value,
-        cash_paid_by: document.getElementById('cash_paid_by').value,
-        cash_received: document.getElementById('cash_received').value,
-        received_by: document.getElementById('received_by').value,
-        total: document.getElementById('total').value
-      };
+   function submitData() {
+  let data = {
+    date: document.getElementById('date').value,
+    square: document.getElementById('square').value,
+    dojo: document.getElementById('dojo').value,
+    sumup: document.getElementById('sumup').value,
+    cash: document.getElementById('cash').value,
+    catering: document.getElementById('catering').value,
+    total: document.getElementById('total').value,
+    actual_total: document.getElementById('actual_total').value, 
+    cash_expenses: document.getElementById('cash_expenses').value,
+    cash_paid_by: document.getElementById('cash_paid_by').value,
+    cash_received: document.getElementById('cash_received').value,
+    received_by: document.getElementById('received_by').value
+  };
 
-      fetch("https://script.google.com/macros/s/AKfycbyI9pxIBuCFK6vzKqs_QZ1iSHSdzHFj0diUL3gUpFPBd1GUbZh0DqwTdhRDSDKCUoKt/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(() => {
-        alert("Sales recorded successfully!");
-        document.querySelector("form").reset();
-      })
-      .catch(error => console.error("Error:", error));
-    }
+  fetch("https://script.google.com/macros/s/AKfycbyI9pxIBuCFK6vzKqs_QZ1iSHSdzHFj0diUL3gUpFPBd1GUbZh0DqwTdhRDSDKCUoKt/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    alert("Sales recorded successfully!");
+    document.querySelector("form").reset();
+  })
+  .catch(error => console.error("Error:", error));
+}
   </script>
 </body>
 </html>
